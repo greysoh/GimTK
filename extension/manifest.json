@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "GimTK",
+  "version": "0.1.0",
+
+  "description": "GIMkit ToolKit is a toolkit for GimKit (mods, mostly cheats, etc.)",
+
+  "icons": {
+    "48": "icons/48px.png"
+  },
+
+  "permissions": [],
+  "host_permissions": ["*://*/*"],
+
+  "web_accessible_resources": [{
+    "matches": ["*://*.gimkit.com/*"],
+    "resources": [
+      "config.mjs",
+      
+      "libs/rbsvrAPI.mjs",
+      "libs/ui.mjs",
+      "libs/anomalyLdr.mjs",
+      "libs/anomalyPreLdr.mjs",
+
+      "anomaly/index.mjs",
+      "anomaly/cheats/aimbot.mjs",
+      "anomaly/automations/scale.mjs",
+      "anomaly/automations/manualCtrlScale.mjs",
+
+      "cheats/ripclassic.mjs",
+      "cheats/rip2d.mjs",
+      "cheats/autoclap.mjs"
+    ]
+  }],
+
+  "externally_connectable": {
+    "matches": ["*://*.gimkit.com/*"]
+  },
+
+  "background": {
+    "service_worker": "worker.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.gimkit.com/host*", "*://*.gimkit.com/join*"],
+      "js": ["index.mjs"],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -13,3 +13,8 @@ This repository contains the code for the GimTK chrome extension, as well as the
 * Go to the `server/` directory.
 * Open a terminal, then run the command: `npm install`.
 * To start it, run `npm start`.
+## Improving "Exploit" timing for Anomaly
+* Close all your tabs except for GimKit.
+* Restart your computer.
+* Buy better internet and a computer with a better CPU.
+  - This improves the chances of it working. Really.

@@ -8,6 +8,7 @@ console.log(` ______     __     __    __     ______   __  __
   \\/_____/   \\/_/   \\/_/  \\/_/     \\/_/   \\/_/\\/_/ 
                                                    `);
 console.log("GimTK is starting up...", "\n [x] Importing modules (and injecting Anomaly)...");
+const runtimeErrors = [];
 
 async function main() {
   // Even more core
@@ -40,14 +41,19 @@ async function main() {
   // Simple way to disable menu if no response
   if (!serverResponse) {
     overlay.createView("Cheats...");
+    overlay.createView("Macros...");
+
+    runtimeErrors.push("Cheats are disabled due to no Input API response.");
+    runtimeErrors.push("Macros are disabled due to no Input API response.");
 
     overlay.appendToView("Main", [
       OverlayItem("=> View Runtime Errors", () => {
-        alert("Cheats has been disabled due to Input API not running.")
+        alert(`${runtimeErrors.length} error(s) generated.\n${runtimeErrors.join("\n")}`);
       })
     ])
   } else {
     OverlayItemToView("Cheats...", "Main", overlay);
+    OverlayItemToView("Macros...", "Main", overlay);
   }
 
   OverlayItemToView("2D Options...", "Automations...", overlay);

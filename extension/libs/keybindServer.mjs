@@ -1,4 +1,5 @@
 import { OverlayItem } from "./ui.mjs";
+import { toggleTenCps } from "../automations/tencps.mjs";
 import { defaultBindings, scopeNameBindings } from "./keybinds.mjs";
 
 let spyingEnabled = false;
@@ -91,8 +92,6 @@ export async function rerender(overlay) {
   ]);
 }
 
-let isZoomToggled = false;
-
 export function initKeybindings(msgApi) {
   document.addEventListener("keydown", async(e) => {
     const registeredBinding = getKeyByValue(itemLookupTable, e.key); //itemLookupTable.find((i) => i == e.key);
@@ -111,6 +110,11 @@ export function initKeybindings(msgApi) {
           type: "toggleManualScale"
         });
 
+        break;
+      }
+
+      case "gim.tencps.autoclick": {
+        toggleTenCps(msgApi);
         break;
       }
     }

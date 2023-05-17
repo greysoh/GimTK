@@ -138,7 +138,6 @@ async function main() {
 
   // DOMContentLoaded doesn't fire here, so I have to do this VERY sketchy loop.
   // Content isolation has forced my hand.
-
   while (true) {
     try {
       document.body.appendChild(overlay.fetchDiv());

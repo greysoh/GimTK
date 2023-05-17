@@ -31,7 +31,9 @@
 
       "cheats/ripclassic.mjs",
       "cheats/rip2d.mjs",
-      "cheats/autoclap.mjs"
+      "cheats/autoclap.mjs",
+
+      "automations/tencps.mjs"
     ]
   }],
 

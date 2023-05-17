@@ -126,7 +126,7 @@ export class Overlay {
    * @returns {string} Version
    */
   pullVersion() {
-    return "0.1";
+    return "0.1.2";
   }
 
   /**
@@ -154,6 +154,26 @@ export class Overlay {
       name: name,
       items: [],
     });
+  }
+
+  /**
+   * Removes a view
+   * @param {string} name Name of the view to remove
+   */
+  destroyView(name) {
+    if (!this.views.find((i) => i.name == name))
+      throw new Error("View not created!");
+    
+    this.views.splice(this.views.indexOf(this.views.find((i) => i.name == name)), 1);
+  }
+
+  /**
+   * Check if a view exists
+   * @param {string} name Name of the view to check if it exists with
+   * @returns {boolean} True if exists, false if the view doesn't exist
+   */
+  viewExists(name) {
+    return Boolean(this.views.find((i) => i.name == name));
   }
 
   /**
@@ -274,6 +294,18 @@ export class Overlay {
     }
 
     return true;
+  }
+
+  /**
+   * Force stops the current overlay
+   */
+  forceStop() {
+    // Clean up our disaster.
+    this.div.style.display = "none";
+    this.activeView = null;
+    this.activeViewElement = null;
+
+    this.elementDiv.innerHTML = "";
   }
 
   /**

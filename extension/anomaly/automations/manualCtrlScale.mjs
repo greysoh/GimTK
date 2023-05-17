@@ -1,8 +1,11 @@
 let isRunning = false;
+let hasInjected = false;
 
 export function manualScale(game) {
-  if (isRunning) return;
-  isRunning = true;
+  isRunning = !isRunning;
+  
+  if (hasInjected) return;
+  hasInjected = true;
 
   let isCtrlPressed = false;
   let zoomState = 1.3;
@@ -21,15 +24,7 @@ export function manualScale(game) {
   });
 
   document.addEventListener("wheel", (e) => {
-    console.log(isCtrlPressed);
-
-    if (!isCtrlPressed) return;
-
-    if (e.deltaY > 0) {
-      //if (zoomState+scrollInterval > 3) return;
-    } else {
-      //if (zoomState-scrollInterval > 0.2) return;
-    }
+    if (!isRunning || !isCtrlPressed) return;
 
     zoomState += (e.deltaY > 0 ? scrollInterval : -scrollInterval);
     mainCamera.setZoom(zoomState, zoomState);

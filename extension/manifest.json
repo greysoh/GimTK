@@ -9,7 +9,7 @@
     "48": "icons/48px.png"
   },
 
-  "permissions": [],
+  "permissions": ["storage"],
   "host_permissions": ["*://*/*"],
 
   "web_accessible_resources": [{
@@ -17,10 +17,12 @@
     "resources": [
       "config.mjs",
       
-      "libs/rbsvrAPI.mjs",
       "libs/ui.mjs",
+      "libs/keybinds.mjs",
+      "libs/rbsvrAPI.mjs",
       "libs/anomalyLdr.mjs",
       "libs/anomalyPreLdr.mjs",
+      "libs/keybindServer.mjs",
 
       "anomaly/index.mjs",
       "anomaly/cheats/aimbot.mjs",

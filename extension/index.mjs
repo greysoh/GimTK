@@ -24,8 +24,12 @@ async function main() {
   const { autoClap } = await import("./cheats/autoclap.mjs");
   const { rip2D } = await import("./cheats/rip2d.mjs");
 
-  console.log(" [x] Attempting to connect to RbAPI Server...");
+  // Binding library
+  const { validateKeybindings, initKeybindings, rerender } = await import("./libs/keybindServer.mjs");
+  console.log(" [x] Starting background task: Validate Keybindings...");
+  validateKeybindings();
 
+  console.log(" [x] Attempting to connect to RbAPI Server...");
   const serverResponse = await pingServer("http://127.0.0.1:8745/api/v1/ping");
   if (!serverResponse) console.log(" [x] Failed to ping server! Ensure that RbAPI is running for remote computer control!");
 
@@ -53,7 +57,17 @@ async function main() {
     ])
   } else {
     OverlayItemToView("Cheats...", "Main", overlay);
-    OverlayItemToView("Macros...", "Main", overlay);
+    
+    overlay.appendToView("Main", [
+      OverlayItem("=> Macros...", async() => {
+        await rerender(overlay);
+
+        overlay.setActiveView("MacroBindings");
+        overlay.render();
+      })
+    ]);
+
+    initKeybindings(msgApi);
   }
 
   OverlayItemToView("2D Options...", "Automations...", overlay);
@@ -89,7 +103,7 @@ async function main() {
     }),
     OverlayItem("Enable Game Zoom", async() => {
       await chrome.runtime.sendMessage({
-        type: "enableManualScale"
+        type: "toggleManualScale"
       });
     }),
 

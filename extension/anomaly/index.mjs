@@ -15,14 +15,17 @@ export async function main(game) {
     switch (msg.type) {
       case "setZoom": {
         setZoom(msg.xZoom, msg.yZoom, game);
+        break;
       }
 
       case "toggleAimbot": {
         aimbot(game);
+        break;
       }
 
-      case "enableManualScale": {
+      case "toggleManualScale": {
         manualScale(game);
+        break;
       }
     }
   });
